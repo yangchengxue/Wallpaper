@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Wallpaper</string>
+    <string name="base_str_download_fail">保存失败</string>
+    <string name="base_str_download_success">保存成功</string>
+    <string name="base_str_dialog_title">需要看一段广告以解锁壁纸</string>
+    <string name="base_str_dialog_cancel">取消</string>
+    <string name="base_str_dialog_continue">继续</string>
+    <string name="base_str_save">保存</string>
+</resources>

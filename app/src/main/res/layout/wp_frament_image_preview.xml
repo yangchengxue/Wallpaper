@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/base_color_main"
+        android:clickable="true"
+        android:focusable="true">
+
+        <com.example.businessbase.views.ImagePreviewRecyclerView
+            android:id="@+id/imagePreviewRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/backIv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="50dp"
+            android:onClick="@{() -> viewModel.popBackStackFragment(fragment)}"
+            android:src="@drawable/base_back_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/controlRL"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/base_shape_r10_translucent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/base_str_save"
+                android:textColor="@color/base_color_white" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="fragment"
+            type="androidx.fragment.app.Fragment" />
+
+        <variable
+            name="viewModel"
+            type="com.example.wallpaper.viewmodels.MainViewModel" />
+
+    </data>
+
+</layout>
