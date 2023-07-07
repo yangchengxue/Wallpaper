@@ -16,10 +16,11 @@
 
         <ImageView
             android:id="@+id/backIv"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="25dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="50dp"
+            android:alpha="0.5"
             android:onClick="@{() -> viewModel.popBackStackFragment(fragment)}"
             android:src="@drawable/base_back_left"
             app:layout_constraintStart_toStartOf="parent"
