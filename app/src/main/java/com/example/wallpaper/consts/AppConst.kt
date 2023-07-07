@@ -1,7 +1,5 @@
 package com.example.wallpaper.consts
 
-import android.os.Environment
-
 object AppConst {
     const val TAG = "WallpaperTAG"
     const val BASE_PATH = "壁纸"

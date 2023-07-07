@@ -1,15 +1,22 @@
 package com.example.wallpaper.fragments
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.example.businessbase.dialogs.PrimitiveDialog
 import com.example.businessbase.ui.BaseFragment
+import com.example.businessbase.utils.ToastUtils
 import com.example.wallpaper.ImagePreviewLayoutManager
 import com.example.wallpaper.ImagePreviewListener
 import com.example.wallpaper.R
 import com.example.wallpaper.adapters.ImagePreviewAdapter
 import com.example.wallpaper.consts.AppConst.ARG_IMAGE_URL
+import com.example.wallpaper.consts.AppConst.TAG
 import com.example.wallpaper.databinding.WpFramentImagePreviewBinding
 import com.example.wallpaper.model.bean.ImgPreviewDataListBean
 import com.example.wallpaper.viewmodels.MainViewModel
@@ -33,6 +40,20 @@ class ImagePreviewFragment :
 
     private var mImgUrl = ""
 
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            Log.i(TAG, "权限已被授予")
+            PrimitiveDialog.showDialog(childFragmentManager) {
+                mViewModel.downloadImg(mImgUrl)
+            }
+        } else {
+            ToastUtils.showToast(requireContext(), "存储权限已被拒绝，请到设置中开启")
+            Log.i(TAG, "权限已被拒绝")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
@@ -51,10 +72,7 @@ class ImagePreviewFragment :
             }
         })
         mBinding.controlRL.setOnClickListener {
-            PrimitiveDialog.showDialog(childFragmentManager) {
-                mViewModel.downloadImg(mImgUrl)
-            }
-
+            checkPermission()
         }
     }
 
@@ -62,6 +80,29 @@ class ImagePreviewFragment :
         arguments?.getString(ARG_IMAGE_URL)?.let {
             mImgUrl = it
             mViewModel.loadBookUnitPagesPreviewData(it)
+        }
+    }
+
+    private fun checkPermission() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                Log.i(TAG, "权限已授予，开始下载图片")
+                PrimitiveDialog.showDialog(childFragmentManager) {
+                    mViewModel.downloadImg(mImgUrl)
+                }
+            }
+
+            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                Log.i(TAG, "继续申请权限")
+                requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+
+            else -> {
+                Log.i(TAG, "申请权限")
+                requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
         }
     }
 
