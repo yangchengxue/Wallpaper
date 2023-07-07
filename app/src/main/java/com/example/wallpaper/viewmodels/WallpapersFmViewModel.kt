@@ -18,7 +18,8 @@ import com.example.businessbase.download.DownloadManager
 import com.example.businessbase.utils.CommonUtil.screenWidth
 import com.example.businessbase.utils.toMD5
 import com.example.wallpaper.R
-import com.example.wallpaper.adapters.WallpapersAdapter.Companion.VIEW_TYPE1
+import com.example.wallpaper.adapters.WallpapersAdapter.Companion.VIEW_TYPE_ADVERTISE
+import com.example.wallpaper.adapters.WallpapersAdapter.Companion.VIEW_TYPE_WALLPAPER
 import com.example.wallpaper.adapters.vm.MyTestDataViewModel
 import com.example.wallpaper.consts.AppConst.BASE_PATH
 import com.example.wallpaper.consts.AppConst.DataLoadState.LOADING
@@ -66,11 +67,11 @@ class WallpapersFmViewModel @Inject constructor(
             delay(2000)
             val data = ArrayList<WallpapersData>()
             for (i in 0..60) {
-                when (i % 4) {
+                when (i % 7) {
                     0 -> {
                         data.add(
                             WallpapersData(
-                                VIEW_TYPE1,
+                                VIEW_TYPE_WALLPAPER,
                                 "https://images.pexels.com/photos/3717270/pexels-photo-3717270.jpeg?auto=compress&cs=tinysrgb&w=1600",
                                 "标题${i}"
                             )
@@ -80,7 +81,7 @@ class WallpapersFmViewModel @Inject constructor(
                     1 -> {
                         data.add(
                             WallpapersData(
-                                VIEW_TYPE1,
+                                VIEW_TYPE_WALLPAPER,
                                 "https://static-cse.canva.cn/blob/324660/739w-UBC9Exu0RD0.jpg",
                                 "标题${i}"
                             )
@@ -90,7 +91,7 @@ class WallpapersFmViewModel @Inject constructor(
                     2 -> {
                         data.add(
                             WallpapersData(
-                                VIEW_TYPE1,
+                                VIEW_TYPE_WALLPAPER,
                                 "https://images.pexels.com/photos/3565742/pexels-photo-3565742.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                                 "标题${i}"
                             )
@@ -100,11 +101,51 @@ class WallpapersFmViewModel @Inject constructor(
                     3 -> {
                         data.add(
                             WallpapersData(
-                                VIEW_TYPE1,
+                                VIEW_TYPE_WALLPAPER,
                                 "https://images.pexels.com/photos/17314099/pexels-photo-17314099.jpeg?auto=compress&cs=tinysrgb&w=1600",
                                 "标题${i}"
                             )
                         )
+                    }
+
+                    4 -> {
+                        data.add(
+                            WallpapersData(
+                                VIEW_TYPE_WALLPAPER,
+                                "https://images.pexels.com/photos/2953179/pexels-photo-2953179.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                                "标题${i}"
+                            )
+                        )
+                    }
+
+                    5 -> {
+                        data.add(
+                            WallpapersData(
+                                VIEW_TYPE_WALLPAPER,
+                                "https://images.pexels.com/photos/17410648/pexels-photo-17410648.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                                "标题${i}"
+                            )
+                        )
+                    }
+
+                    6 -> {
+                        if (i == 13) {
+                            data.add(
+                                WallpapersData(
+                                    VIEW_TYPE_ADVERTISE,
+                                    "https://images.pexels.com/photos/17314099/pexels-photo-17314099.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                                    "标题${i}"
+                                )
+                            )
+                        } else {
+                            data.add(
+                                WallpapersData(
+                                    VIEW_TYPE_WALLPAPER,
+                                    "https://images.pexels.com/photos/17314099/pexels-photo-17314099.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                                    "标题${i}"
+                                )
+                            )
+                        }
                     }
                 }
             }

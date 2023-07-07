@@ -22,11 +22,10 @@ import com.example.wallpaper.consts.AppConst.TAG
 import com.example.wallpaper.consts.AppConst.WALLPAPER_INTERVAL_PROPORTION
 import com.example.wallpaper.consts.AppConst.WALLPAPER_INTERVAL_SPAN_COUNT
 import com.example.wallpaper.consts.AppConst.WALLPAPER_SPAN_COUNT
+import com.example.wallpaper.databinding.WpItemWallpaperAdvertiseBinding
 import com.example.wallpaper.databinding.WpItemWallpaperBinding
-import com.example.wallpaper.databinding.WpItemWallpaperTempBinding
 import com.example.wallpaper.model.bean.WallpapersData
 import javax.inject.Inject
-
 
 class WallpapersAdapter @Inject constructor() :
     ListAdapter<WallpapersData, WallpapersAdapter.AbstractViewHolder>(DiffItemCallBack()) {
@@ -35,8 +34,8 @@ class WallpapersAdapter @Inject constructor() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbstractViewHolder {
         return when (viewType) {
-            VIEW_TYPE1 -> {
-                TitleViewHolder(
+            VIEW_TYPE_WALLPAPER -> {
+                WallpaperViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
                         R.layout.wp_item_wallpaper,
@@ -46,11 +45,11 @@ class WallpapersAdapter @Inject constructor() :
                 )
             }
 
-            VIEW_TYPE2 -> {
-                ContentViewHolder(
+            VIEW_TYPE_ADVERTISE -> {
+                AdvertiseViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
-                        R.layout.wp_item_wallpaper_temp,
+                        R.layout.wp_item_wallpaper_advertise,
                         parent,
                         false
                     )
@@ -58,7 +57,7 @@ class WallpapersAdapter @Inject constructor() :
             }
 
             else -> {
-                TitleViewHolder(
+                WallpaperViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
                         R.layout.wp_item_wallpaper,
@@ -80,7 +79,7 @@ class WallpapersAdapter @Inject constructor() :
         abstract fun bind(data: WallpapersData)
     }
 
-    class TitleViewHolder(
+    class WallpaperViewHolder(
         private val binding: WpItemWallpaperBinding,
         private var clickItemListener: ((vm: MyTestDataViewModel?) -> Unit)?,
     ) : AbstractViewHolder(binding.root) {
@@ -120,8 +119,8 @@ class WallpapersAdapter @Inject constructor() :
         }
     }
 
-    class ContentViewHolder(
-        private val binding: WpItemWallpaperTempBinding,
+    class AdvertiseViewHolder(
+        private val binding: WpItemWallpaperAdvertiseBinding,
     ) : AbstractViewHolder(binding.root) {
         init {
             binding.setClickListener {
@@ -132,14 +131,15 @@ class WallpapersAdapter @Inject constructor() :
         override fun bind(data: WallpapersData) {
             with(binding) {
                 viewModel = MyTestDataViewModel(data)
+
                 executePendingBindings()
             }
         }
     }
 
     companion object {
-        const val VIEW_TYPE1 = 1
-        const val VIEW_TYPE2 = 2
+        const val VIEW_TYPE_WALLPAPER = 1
+        const val VIEW_TYPE_ADVERTISE = 2
     }
 }
 

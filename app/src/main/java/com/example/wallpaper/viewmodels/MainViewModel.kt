@@ -18,7 +18,7 @@ import com.example.businessbase.download.DownloadManager
 import com.example.businessbase.utils.CommonUtil.screenWidth
 import com.example.businessbase.utils.toMD5
 import com.example.wallpaper.R
-import com.example.wallpaper.adapters.WallpapersAdapter.Companion.VIEW_TYPE1
+import com.example.wallpaper.adapters.WallpapersAdapter.Companion.VIEW_TYPE_WALLPAPER
 import com.example.wallpaper.adapters.vm.MyTestDataViewModel
 import com.example.wallpaper.consts.AppConst.BASE_PATH
 import com.example.wallpaper.consts.AppConst.TAG
@@ -64,7 +64,7 @@ class MainViewModel @Inject constructor(
                     0 -> {
                         data.add(
                             WallpapersData(
-                                VIEW_TYPE1,
+                                VIEW_TYPE_WALLPAPER,
                                 "https://images.pexels.com/photos/3717270/pexels-photo-3717270.jpeg?auto=compress&cs=tinysrgb&w=1600",
                                 "标题${i}"
                             )
@@ -74,7 +74,7 @@ class MainViewModel @Inject constructor(
                     1 -> {
                         data.add(
                             WallpapersData(
-                                VIEW_TYPE1,
+                                VIEW_TYPE_WALLPAPER,
                                 "https://static-cse.canva.cn/blob/324660/739w-UBC9Exu0RD0.jpg",
                                 "标题${i}"
                             )
@@ -84,7 +84,7 @@ class MainViewModel @Inject constructor(
                     2 -> {
                         data.add(
                             WallpapersData(
-                                VIEW_TYPE1,
+                                VIEW_TYPE_WALLPAPER,
                                 "https://images.pexels.com/photos/3565742/pexels-photo-3565742.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                                 "标题${i}"
                             )
@@ -94,7 +94,7 @@ class MainViewModel @Inject constructor(
                     3 -> {
                         data.add(
                             WallpapersData(
-                                VIEW_TYPE1,
+                                VIEW_TYPE_WALLPAPER,
                                 "https://images.pexels.com/photos/17314099/pexels-photo-17314099.jpeg?auto=compress&cs=tinysrgb&w=1600",
                                 "标题${i}"
                             )
